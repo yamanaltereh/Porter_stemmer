@@ -1,0 +1,21 @@
+<h1>Select Excel File</h1>
+<%= form_tag '/upload', multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+<hr>
+<br>
+<center> <table border="1">
+  <th width="300" >Word</th>
+  <th width="300" >Stemmer</th>
+  <%- @words.each do |w| %>
+  <tr>
+    
+  <td height="33"> <center>
+    <%= w.name %> </center> </td>
+
+  <td height="33"> <center>
+  <%= w.stemmer %> </center> </td>
+  </tr>
+  <% end %>
+</table> </center>
