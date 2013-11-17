@@ -11,12 +11,17 @@ class FileController < ApplicationController
     file = params[:file]
     @words = []
     unless file.nil?
-      Iconv::CSV.foreach(file.path ) do |row|
-        if Word.find_by_name(row[0]).nil?
-          Word.create!(:name => row[0],:stemmer => Stemmer::stem_word(row[0]))
+      case file.content_type
+      when "text/csv"
+        Iconv::CSV.foreach(file.path ) do |row|
+          if Word.find_by_name(row[0]).nil?
+            Word.create!(:name => row[0],:stemmer => Stemmer::stem_word(row[0]))
+          end
         end
+      #else 
+       # raise "Unknown file type: #{file.original_filename}"
       end
     end
-    redirect_to "/", :alert => t("messages.can't_do")
+    redirect_to "/", :alert => "hi"
   end
 end
