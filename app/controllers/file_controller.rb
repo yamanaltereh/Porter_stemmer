@@ -9,11 +9,10 @@ class FileController < ApplicationController
   def upload
     puts "=================================================================================="
     file = params[:file]
-    @words = []
     unless file.nil?
       case file.content_type
       when "text/csv"
-        Iconv::CSV.foreach(file.path ) do |row|
+        Iconv::CSV.foreach(file.path.to_s ) do |row|
           if Word.find_by_name(row[0]).nil?
             Word.create!(:name => row[0],:stemmer => Stemmer::stem_word(row[0]))
           end
