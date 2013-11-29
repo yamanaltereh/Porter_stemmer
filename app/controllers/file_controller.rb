@@ -19,6 +19,9 @@ class FileController < ApplicationController
 
 def Levenshtein_distance(str1, str2)
 
+
+#PorterStemmer::Application.config.row_keyboard 
+#PorterStemmer::Application.config.column_keyborad 
     n = str1.length
     m = str2.length
     return nil if m.zero? & n.zero?
