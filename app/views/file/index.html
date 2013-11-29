@@ -1,3 +1,18 @@
+<h1>Enter two words :</h1>
+<%= form_tag '/distance', multipart: true do %>
+  <%= label_tag :first_word%>
+  <%= text_field_tag :word1, (!@word1.nil? ? @word1 : "") %>
+  <br>
+  <%= label_tag :second_word%>
+  <%= text_field_tag :word2, (!@word2.nil? ? @word2 : "") %>
+  <%= submit_tag "Distance" %>
+<% end %>
+<br>
+<%- if !@distance.nil? %>
+  Levenshtein Distance is <%= @distance %>
+<% end %>
+<hr>
+<br>
 <h1>Select CSV File</h1>
 <%= form_tag '/upload', multipart: true do %>
   <%= file_field_tag :file %>
@@ -19,3 +34,5 @@
   </tr>
   <% end %>
 </table> </center>
+
+<%= link_to "clean", "/clean", :confirm => "Are you sure you want to clean all stemmer words !? ", :method => :delete %>

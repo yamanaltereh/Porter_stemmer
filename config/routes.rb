@@ -5,6 +5,8 @@ PorterStemmer::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'file#index'
    post '/upload' => 'file#upload'
+   delete '/clean' => 'file#clean'
+   post 'distance' => 'file#distance'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
