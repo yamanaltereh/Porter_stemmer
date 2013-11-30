@@ -18,10 +18,6 @@ class FileController < ApplicationController
 
 
 def Levenshtein_distance(str1, str2)
-
-
-#PorterStemmer::Application.config.row_keyboard 
-#PorterStemmer::Application.config.column_keyborad 
     n = str1.length
     m = str2.length
     return nil if m.zero? & n.zero?
@@ -34,23 +30,24 @@ def Levenshtein_distance(str1, str2)
     n.times do |i|
       e = i + 1
       m.times do |j|
-        cost = (str1[i] == str2[j]) ? 0 : 1
+#        cost = (str1[i] == str2[j]) ? 0 : 1
+        # Keyborad distance
+        cost = (PorterStemmer::Application.config.row_keyboard[str1[i]] - PorterStemmer::Application.config.row_keyboard[str2[j]]).abs
+        cost += (PorterStemmer::Application.config.column_keyborad[str1[i]] - PorterStemmer::Application.config.column_keyborad[str2[j]]).abs        
         x = [
           d[j+1] + 1, # insertion
           e + 1,      # deletion
-          d[j] + cost # substitution
+          d[j] +cost # substitution
         ].min
         d[j] = e
         e = x
       end
       d[m] = x
     end
-
     return x
   end
 
   def upload
-    puts "=================================================================================="
     file = params[:file]
     unless file.nil?
       case file.content_type
