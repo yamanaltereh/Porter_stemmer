@@ -32,8 +32,8 @@ def Levenshtein_distance(str1, str2)
       m.times do |j|
 #        cost = (str1[i] == str2[j]) ? 0 : 1
         # Keyborad distance
-        cost = (PorterStemmer::Application.config.row_keyboard[str1[i]] - PorterStemmer::Application.config.row_keyboard[str2[j]]).abs
-        cost += (PorterStemmer::Application.config.column_keyborad[str1[i]] - PorterStemmer::Application.config.column_keyborad[str2[j]]).abs        
+        cost = (StemmerDistanceWords::Application.config.row_keyboard[str1[i]] - StemmerDistanceWords::Application.config.row_keyboard[str2[j]]).abs
+        cost += (StemmerDistanceWords::Application.config.column_keyborad[str1[i]] - StemmerDistanceWords::Application.config.column_keyborad[str2[j]]).abs        
         x = [
           d[j+1] + 1, # insertion
           e + 1,      # deletion
